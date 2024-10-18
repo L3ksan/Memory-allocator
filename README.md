@@ -17,7 +17,7 @@
 
 1. **Клонируйте репозиторий**:
     ```bash
-    git clone <URL вашего репозитория>
+    gh repo clone L3ksan/Memory-allocator
     ```
 2. **Перейдите в папку с проектом**:
     ```bash
