@@ -21,7 +21,7 @@
     ```
 2. **Перейдите в папку с проектом**:
     ```bash
-    cd memory_allocator
+    cd Memory-allocator
     ```
 3. **Скомпилируйте проект**:
     ```bash
