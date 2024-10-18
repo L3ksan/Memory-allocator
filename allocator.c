@@ -1,22 +1,36 @@
+/**
+ * @file allocator.c
+ * @brief Реализация функций аллокатора памяти.
+ *
+ * Этот файл содержит реализацию функций для управления динамической памятью.
+ */
+
 #include "allocator.h"
 
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 1024 ///< Размер статического буфера для аллокатора
 
 // Определяем массив freed_blocks и переменную freed_count
-void* freed_blocks[MAX_FREED_BLOCKS]; // Массив для хранения освобожденных блоков
-int freed_count = 0; // Счетчик освобожденных блоков
+void* freed_blocks[MAX_FREED_BLOCKS]; ///< Массив для хранения освобожденных блоков
+int freed_count = 0; ///< Счетчик освобожденных блоков
 
-static char buffer[BUFFER_SIZE]; // Статический буфер для хранения данных
-static BlockHeader* free_list = (void*)buffer; // Список свободных блоков
+static char buffer[BUFFER_SIZE]; ///< Статический буфер для хранения данных
+static BlockHeader* free_list = (void*)buffer; ///< Список свободных блоков
 
-// Инициализация аллокатора
+/**
+ * @brief Инициализирует аллокатор, создавая первый свободный блок.
+ */
 void init_allocator() {
     free_list->size = BUFFER_SIZE - sizeof(BlockHeader);
     free_list->is_free = 1;
     free_list->next = NULL;
 }
 
-// Функция поиска свободного блока
+/**
+ * @brief Находит первый свободный блок, который достаточно велик для размещения.
+ * 
+ * @param size Размер памяти, который нужно выделить.
+ * @return Указатель на найденный свободный блок или NULL при отсутствии подходящего блока.
+ */
 BlockHeader* find_free_block(size_t size) {
     BlockHeader* current = free_list;
     while (current != NULL && (!current->is_free || current->size < size)) {
@@ -25,7 +39,12 @@ BlockHeader* find_free_block(size_t size) {
     return current;
 }
 
-// Функция разделения блока на два
+/**
+ * @brief Разделяет большой блок на два меньших.
+ * 
+ * @param block Указатель на исходный блок.
+ * @param size Размер, который нужно выделить.
+ */
 void split_block(BlockHeader* block, size_t size) {
     BlockHeader* new_block = (void*)((char*)block + sizeof(BlockHeader) + size);
     new_block->size = block->size - size - sizeof(BlockHeader);
@@ -35,7 +54,12 @@ void split_block(BlockHeader* block, size_t size) {
     block->next = new_block;
 }
 
-// Выделение памяти
+/**
+ * @brief Выделяет блок памяти заданного размера.
+ * 
+ * @param size Размер выделяемой памяти в байтах.
+ * @return Указатель на выделенную память или NULL при ошибке.
+ */
 void* my_malloc(size_t size) {
     if (size <= 0) return NULL;
 
@@ -49,7 +73,11 @@ void* my_malloc(size_t size) {
     return (void*)((char*)block + sizeof(BlockHeader));
 }
 
-// Освобождение памяти
+/**
+ * @brief Освобождает ранее выделенный блок памяти.
+ * 
+ * @param ptr Указатель на блок памяти, который нужно освободить.
+ */
 void my_free(void* ptr) {
     if (!ptr) return; // Проверка на NULL
 
@@ -62,11 +90,16 @@ void my_free(void* ptr) {
     block->is_free = 1;
 }
 
-// Перевыделение памяти
+/**
+ * @brief Перевыделяет блок памяти на новый размер.
+ * 
+ * @param ptr Указатель на блок памяти, который нужно перевыделить.
+ * @param size Новый размер блока памяти.
+ * @return Указатель на новый блок памяти или NULL при ошибке.
+ */
 void* my_realloc(void* ptr, size_t size) {
-    // Проверка, был ли указатель освобожден
     if (is_pointer_freed(ptr)) {
-        return NULL; // Запрет на переопределение освобожденной памяти
+        return NULL;
     }
     if (!ptr) return my_malloc(size);
     if (size <= 0) {
@@ -87,12 +120,17 @@ void* my_realloc(void* ptr, size_t size) {
     return new_ptr;
 }
 
-// Функция для проверки, был ли указатель освобожден
+/**
+ * @brief Проверяет, был ли указатель освобожден.
+ * 
+ * @param ptr Указатель, который нужно проверить.
+ * @return true, если указатель был освобожден, иначе false.
+ */
 bool is_pointer_freed(void* ptr) {
     for (int i = 0; i < freed_count; i++) {
         if (freed_blocks[i] == ptr) {
-            return true; // Указатель был освобожден
+            return true;
         }
     }
-    return false; // Указатель не был освобожден
+    return false;
 }

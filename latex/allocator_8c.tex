@@ -1,0 +1,164 @@
+\doxysection{Файл allocator.\+c}
+\hypertarget{allocator_8c}{}\label{allocator_8c}\index{allocator.c@{allocator.c}}
+
+
+Реализация функций аллокатора памяти.  
+
+
+{\ttfamily \#include "{}allocator.\+h"{}}\newline
+\doxysubsubsection*{Макросы}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{allocator_8c_a6b20d41d6252e9871430c242cb1a56e7}\label{allocator_8c_a6b20d41d6252e9871430c242cb1a56e7} 
+\#define {\bfseries BUFFER\+\_\+\+SIZE}~1024
+\begin{DoxyCompactList}\small\item\em Размер статического буфера для аллокатора \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Функции}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{allocator_8c_a245e97128099d03d9ce55d976a10f1de}{init\+\_\+allocator}} ()
+\begin{DoxyCompactList}\small\item\em Инициализирует аллокатор, создавая первый свободный блок. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_block_header}{Block\+Header}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{allocator_8c_aea17a25840dab8b99b93bb043af60620}{find\+\_\+free\+\_\+block}} (size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Находит первый свободный блок, который достаточно велик для размещения. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{allocator_8c_ab8b305cc932bbdb55a83fd2a32e34086}{split\+\_\+block}} (\mbox{\hyperlink{struct_block_header}{Block\+Header}} \texorpdfstring{$\ast$}{*}block, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Разделяет большой блок на два меньших. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{allocator_8c_a0156d756fe74d063ebfa863c5ed176f3}{my\+\_\+malloc}} (size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Выделяет блок памяти заданного размера. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{allocator_8c_a3a3ddffcaadb60b7715c9889f8c56afb}{my\+\_\+free}} (void \texorpdfstring{$\ast$}{*}ptr)
+\begin{DoxyCompactList}\small\item\em Освобождает ранее выделенный блок памяти. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{allocator_8c_ade5ad20ee01364df80d1ed0aaf2295a1}{my\+\_\+realloc}} (void \texorpdfstring{$\ast$}{*}ptr, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Перевыделяет блок памяти на новый размер. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{allocator_8c_a5466d918a08875bf2e01157c79ef7b2c}{is\+\_\+pointer\+\_\+freed}} (void \texorpdfstring{$\ast$}{*}ptr)
+\begin{DoxyCompactList}\small\item\em Проверяет, был ли указатель освобожден. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Переменные}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{allocator_8c_ab89890ebe591456f4326425924306bbc}\label{allocator_8c_ab89890ebe591456f4326425924306bbc} 
+void \texorpdfstring{$\ast$}{*} {\bfseries freed\+\_\+blocks} \mbox{[}\mbox{\hyperlink{allocator_8h_abb4eb3ea327c8e34915aecb270116722}{MAX\+\_\+\+FREED\+\_\+\+BLOCKS}}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Массив для хранения освобожденных блоков \end{DoxyCompactList}\item 
+\Hypertarget{allocator_8c_a5680dd6ed671c496e58cc3adf6a71f26}\label{allocator_8c_a5680dd6ed671c496e58cc3adf6a71f26} 
+int {\bfseries freed\+\_\+count} = 0
+\begin{DoxyCompactList}\small\item\em Счетчик освобожденных блоков \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Реализация функций аллокатора памяти. 
+
+Этот файл содержит реализацию функций для управления динамической памятью. 
+
+\doxysubsection{Функции}
+\Hypertarget{allocator_8c_aea17a25840dab8b99b93bb043af60620}\index{allocator.c@{allocator.c}!find\_free\_block@{find\_free\_block}}
+\index{find\_free\_block@{find\_free\_block}!allocator.c@{allocator.c}}
+\doxysubsubsection{\texorpdfstring{find\_free\_block()}{find\_free\_block()}}
+{\footnotesize\ttfamily \label{allocator_8c_aea17a25840dab8b99b93bb043af60620} 
+\mbox{\hyperlink{struct_block_header}{Block\+Header}} \texorpdfstring{$\ast$}{*} find\+\_\+free\+\_\+block (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Находит первый свободный блок, который достаточно велик для размещения. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em size} & Размер памяти, который нужно выделить. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Указатель на найденный свободный блок или NULL при отсутствии подходящего блока. 
+\end{DoxyReturn}
+\Hypertarget{allocator_8c_a245e97128099d03d9ce55d976a10f1de}\index{allocator.c@{allocator.c}!init\_allocator@{init\_allocator}}
+\index{init\_allocator@{init\_allocator}!allocator.c@{allocator.c}}
+\doxysubsubsection{\texorpdfstring{init\_allocator()}{init\_allocator()}}
+{\footnotesize\ttfamily \label{allocator_8c_a245e97128099d03d9ce55d976a10f1de} 
+void init\+\_\+allocator (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Инициализирует аллокатор, создавая первый свободный блок. 
+
+Инициализирует аллокатор памяти. \Hypertarget{allocator_8c_a5466d918a08875bf2e01157c79ef7b2c}\index{allocator.c@{allocator.c}!is\_pointer\_freed@{is\_pointer\_freed}}
+\index{is\_pointer\_freed@{is\_pointer\_freed}!allocator.c@{allocator.c}}
+\doxysubsubsection{\texorpdfstring{is\_pointer\_freed()}{is\_pointer\_freed()}}
+{\footnotesize\ttfamily \label{allocator_8c_a5466d918a08875bf2e01157c79ef7b2c} 
+bool is\+\_\+pointer\+\_\+freed (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{ptr}{}\end{DoxyParamCaption})}
+
+
+
+Проверяет, был ли указатель освобожден. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em ptr} & Указатель, который нужно проверить. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+true, если указатель был освобожден, иначе false. 
+\end{DoxyReturn}
+\Hypertarget{allocator_8c_a3a3ddffcaadb60b7715c9889f8c56afb}\index{allocator.c@{allocator.c}!my\_free@{my\_free}}
+\index{my\_free@{my\_free}!allocator.c@{allocator.c}}
+\doxysubsubsection{\texorpdfstring{my\_free()}{my\_free()}}
+{\footnotesize\ttfamily \label{allocator_8c_a3a3ddffcaadb60b7715c9889f8c56afb} 
+void my\+\_\+free (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{ptr}{}\end{DoxyParamCaption})}
+
+
+
+Освобождает ранее выделенный блок памяти. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em ptr} & Указатель на блок памяти, который нужно освободить. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{allocator_8c_a0156d756fe74d063ebfa863c5ed176f3}\index{allocator.c@{allocator.c}!my\_malloc@{my\_malloc}}
+\index{my\_malloc@{my\_malloc}!allocator.c@{allocator.c}}
+\doxysubsubsection{\texorpdfstring{my\_malloc()}{my\_malloc()}}
+{\footnotesize\ttfamily \label{allocator_8c_a0156d756fe74d063ebfa863c5ed176f3} 
+void \texorpdfstring{$\ast$}{*} my\+\_\+malloc (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Выделяет блок памяти заданного размера. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em size} & Размер выделяемой памяти в байтах. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Указатель на выделенную память или NULL при ошибке. 
+\end{DoxyReturn}
+\Hypertarget{allocator_8c_ade5ad20ee01364df80d1ed0aaf2295a1}\index{allocator.c@{allocator.c}!my\_realloc@{my\_realloc}}
+\index{my\_realloc@{my\_realloc}!allocator.c@{allocator.c}}
+\doxysubsubsection{\texorpdfstring{my\_realloc()}{my\_realloc()}}
+{\footnotesize\ttfamily \label{allocator_8c_ade5ad20ee01364df80d1ed0aaf2295a1} 
+void \texorpdfstring{$\ast$}{*} my\+\_\+realloc (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{ptr}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Перевыделяет блок памяти на новый размер. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em ptr} & Указатель на блок памяти, который нужно перевыделить. \\
+\hline
+{\em size} & Новый размер блока памяти. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Указатель на новый блок памяти или NULL при ошибке. 
+\end{DoxyReturn}
+\Hypertarget{allocator_8c_ab8b305cc932bbdb55a83fd2a32e34086}\index{allocator.c@{allocator.c}!split\_block@{split\_block}}
+\index{split\_block@{split\_block}!allocator.c@{allocator.c}}
+\doxysubsubsection{\texorpdfstring{split\_block()}{split\_block()}}
+{\footnotesize\ttfamily \label{allocator_8c_ab8b305cc932bbdb55a83fd2a32e34086} 
+void split\+\_\+block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_block_header}{Block\+Header}} \texorpdfstring{$\ast$}{*}}]{block}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Разделяет большой блок на два меньших. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em block} & Указатель на исходный блок. \\
+\hline
+{\em size} & Размер, который нужно выделить. \\
+\hline
+\end{DoxyParams}

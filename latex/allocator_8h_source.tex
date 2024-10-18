@@ -1,0 +1,35 @@
+\doxysection{allocator.\+h}
+\hypertarget{allocator_8h_source}{}\label{allocator_8h_source}\mbox{\hyperlink{allocator_8h}{См. документацию.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ ALLOCATOR\_H}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ ALLOCATOR\_H}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ MAX\_FREED\_BLOCKS\ 100\ }}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ Объявление\ массивов\ и\ переменных\ как\ extern}}
+\DoxyCodeLine{00017\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{allocator_8h_ab89890ebe591456f4326425924306bbc}{freed\_blocks}}[\mbox{\hyperlink{allocator_8h_abb4eb3ea327c8e34915aecb270116722}{MAX\_FREED\_BLOCKS}}];\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{allocator_8h_a5680dd6ed671c496e58cc3adf6a71f26}{freed\_count}};\ }
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_block_header}{BlockHeader}}\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{struct_block_header_a6d7192feaa9f7254cce69a47d3860299}{size}};\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_block_header_abb1af445b5be71b75c808e8268327595}{is\_free}};\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_block_header}{BlockHeader}}*\ \mbox{\hyperlink{struct_block_header_ae71e7a58fd6a490e2995b3985e6eb451}{next}};\ }
+\DoxyCodeLine{00030\ \}\ \mbox{\hyperlink{struct_block_header}{BlockHeader}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{allocator_8h_a245e97128099d03d9ce55d976a10f1de}{init\_allocator}}();}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{allocator_8h_a0156d756fe74d063ebfa863c5ed176f3}{my\_malloc}}(\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{struct_block_header_a6d7192feaa9f7254cce69a47d3860299}{size}});}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00050\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{allocator_8h_a3a3ddffcaadb60b7715c9889f8c56afb}{my\_free}}(\textcolor{keywordtype}{void}*\ ptr);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00059\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{allocator_8h_ade5ad20ee01364df80d1ed0aaf2295a1}{my\_realloc}}(\textcolor{keywordtype}{void}*\ ptr,\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{struct_block_header_a6d7192feaa9f7254cce69a47d3860299}{size}});}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00067\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{allocator_8h_a5466d918a08875bf2e01157c79ef7b2c}{is\_pointer\_freed}}(\textcolor{keywordtype}{void}*\ ptr);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ALLOCATOR\_H}}
+
+\end{DoxyCode}

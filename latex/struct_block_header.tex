@@ -1,0 +1,33 @@
+\doxysection{Структура Block\+Header}
+\hypertarget{struct_block_header}{}\label{struct_block_header}\index{BlockHeader@{BlockHeader}}
+
+
+Структура заголовка блока памяти.  
+
+
+
+
+{\ttfamily \#include $<$allocator.\+h$>$}
+
+\doxysubsubsection*{Открытые атрибуты}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{struct_block_header_a6d7192feaa9f7254cce69a47d3860299}\label{struct_block_header_a6d7192feaa9f7254cce69a47d3860299} 
+size\+\_\+t {\bfseries size}
+\begin{DoxyCompactList}\small\item\em Размер блока памяти \end{DoxyCompactList}\item 
+\Hypertarget{struct_block_header_abb1af445b5be71b75c808e8268327595}\label{struct_block_header_abb1af445b5be71b75c808e8268327595} 
+int {\bfseries is\+\_\+free}
+\begin{DoxyCompactList}\small\item\em Статус свободности блока (1 — свободен, 0 — занят) \end{DoxyCompactList}\item 
+\Hypertarget{struct_block_header_ae71e7a58fd6a490e2995b3985e6eb451}\label{struct_block_header_ae71e7a58fd6a490e2995b3985e6eb451} 
+struct \mbox{\hyperlink{struct_block_header}{Block\+Header}} \texorpdfstring{$\ast$}{*} {\bfseries next}
+\begin{DoxyCompactList}\small\item\em Указатель на следующий блок \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Структура заголовка блока памяти. 
+
+Структура, описывающая заголовок каждого блока памяти, используемого в аллокаторе. 
+
+Объявления и описания членов структуры находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{allocator_8h}{allocator.\+h}}\end{DoxyCompactItemize}

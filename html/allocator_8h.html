@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.12.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Memory-Allocator: Файл allocator.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Memory-Allocator
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.12.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Классы</a> &#124;
+<a href="#define-members">Макросы</a> &#124;
+<a href="#typedef-members">Определения типов</a> &#124;
+<a href="#func-members">Функции</a> &#124;
+<a href="#var-members">Переменные</a>  </div>
+  <div class="headertitle"><div class="title">Файл allocator.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Заголовочный файл для аллокатора памяти.  
+<a href="#details">Подробнее...</a></p>
+<div class="textblock"><code>#include &lt;stddef.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+</div>
+<p><a href="allocator_8h_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_block_header.html">BlockHeader</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Структура заголовка блока памяти.  <a href="struct_block_header.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Макросы</h2></td></tr>
+<tr class="memitem:abb4eb3ea327c8e34915aecb270116722" id="r_abb4eb3ea327c8e34915aecb270116722"><td class="memItemLeft" align="right" valign="top"><a id="abb4eb3ea327c8e34915aecb270116722" name="abb4eb3ea327c8e34915aecb270116722"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_FREED_BLOCKS</b>&#160;&#160;&#160;100</td></tr>
+<tr class="memdesc:abb4eb3ea327c8e34915aecb270116722"><td class="mdescLeft">&#160;</td><td class="mdescRight">Максимальное количество освобожденных блоков <br /></td></tr>
+<tr class="separator:abb4eb3ea327c8e34915aecb270116722"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Определения типов</h2></td></tr>
+<tr class="memitem:a1ca609714b5efe0b8571c14c51fd4609" id="r_a1ca609714b5efe0b8571c14c51fd4609"><td class="memItemLeft" align="right" valign="top"><a id="a1ca609714b5efe0b8571c14c51fd4609" name="a1ca609714b5efe0b8571c14c51fd4609"></a>
+typedef struct BlockHeader&#160;</td><td class="memItemRight" valign="bottom"><b>BlockHeader</b></td></tr>
+<tr class="separator:a1ca609714b5efe0b8571c14c51fd4609"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:a245e97128099d03d9ce55d976a10f1de" id="r_a245e97128099d03d9ce55d976a10f1de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a245e97128099d03d9ce55d976a10f1de">init_allocator</a> ()</td></tr>
+<tr class="memdesc:a245e97128099d03d9ce55d976a10f1de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Инициализирует аллокатор памяти.  <br /></td></tr>
+<tr class="separator:a245e97128099d03d9ce55d976a10f1de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0156d756fe74d063ebfa863c5ed176f3" id="r_a0156d756fe74d063ebfa863c5ed176f3"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0156d756fe74d063ebfa863c5ed176f3">my_malloc</a> (size_t size)</td></tr>
+<tr class="memdesc:a0156d756fe74d063ebfa863c5ed176f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выделяет блок памяти заданного размера.  <br /></td></tr>
+<tr class="separator:a0156d756fe74d063ebfa863c5ed176f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a3ddffcaadb60b7715c9889f8c56afb" id="r_a3a3ddffcaadb60b7715c9889f8c56afb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a3ddffcaadb60b7715c9889f8c56afb">my_free</a> (void *ptr)</td></tr>
+<tr class="memdesc:a3a3ddffcaadb60b7715c9889f8c56afb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Освобождает ранее выделенный блок памяти.  <br /></td></tr>
+<tr class="separator:a3a3ddffcaadb60b7715c9889f8c56afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade5ad20ee01364df80d1ed0aaf2295a1" id="r_ade5ad20ee01364df80d1ed0aaf2295a1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade5ad20ee01364df80d1ed0aaf2295a1">my_realloc</a> (void *ptr, size_t size)</td></tr>
+<tr class="memdesc:ade5ad20ee01364df80d1ed0aaf2295a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Перевыделяет блок памяти на новый размер.  <br /></td></tr>
+<tr class="separator:ade5ad20ee01364df80d1ed0aaf2295a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5466d918a08875bf2e01157c79ef7b2c" id="r_a5466d918a08875bf2e01157c79ef7b2c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5466d918a08875bf2e01157c79ef7b2c">is_pointer_freed</a> (void *ptr)</td></tr>
+<tr class="memdesc:a5466d918a08875bf2e01157c79ef7b2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверяет, был ли указатель освобожден.  <br /></td></tr>
+<tr class="separator:a5466d918a08875bf2e01157c79ef7b2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Переменные</h2></td></tr>
+<tr class="memitem:ab89890ebe591456f4326425924306bbc" id="r_ab89890ebe591456f4326425924306bbc"><td class="memItemLeft" align="right" valign="top"><a id="ab89890ebe591456f4326425924306bbc" name="ab89890ebe591456f4326425924306bbc"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>freed_blocks</b> [<a class="el" href="#abb4eb3ea327c8e34915aecb270116722">MAX_FREED_BLOCKS</a>]</td></tr>
+<tr class="memdesc:ab89890ebe591456f4326425924306bbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Массив для хранения освобожденных блоков <br /></td></tr>
+<tr class="separator:ab89890ebe591456f4326425924306bbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5680dd6ed671c496e58cc3adf6a71f26" id="r_a5680dd6ed671c496e58cc3adf6a71f26"><td class="memItemLeft" align="right" valign="top"><a id="a5680dd6ed671c496e58cc3adf6a71f26" name="a5680dd6ed671c496e58cc3adf6a71f26"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>freed_count</b></td></tr>
+<tr class="memdesc:a5680dd6ed671c496e58cc3adf6a71f26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Счетчик освобожденных блоков <br /></td></tr>
+<tr class="separator:a5680dd6ed671c496e58cc3adf6a71f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Заголовочный файл для аллокатора памяти. </p>
+<p>Этот файл содержит объявления функций и структур, используемых для управления динамической памятью. </p>
+</div><h2 class="groupheader">Функции</h2>
+<a id="a245e97128099d03d9ce55d976a10f1de" name="a245e97128099d03d9ce55d976a10f1de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a245e97128099d03d9ce55d976a10f1de">&#9670;&#160;</a></span>init_allocator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void init_allocator </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Инициализирует аллокатор памяти. </p>
+<p>Инициализирует аллокатор памяти. </p>
+
+</div>
+</div>
+<a id="a5466d918a08875bf2e01157c79ef7b2c" name="a5466d918a08875bf2e01157c79ef7b2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5466d918a08875bf2e01157c79ef7b2c">&#9670;&#160;</a></span>is_pointer_freed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_pointer_freed </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Проверяет, был ли указатель освобожден. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>Указатель, который нужно проверить. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>true, если указатель был освобожден, иначе false. </dd></dl>
+
+</div>
+</div>
+<a id="a3a3ddffcaadb60b7715c9889f8c56afb" name="a3a3ddffcaadb60b7715c9889f8c56afb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a3ddffcaadb60b7715c9889f8c56afb">&#9670;&#160;</a></span>my_free()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void my_free </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Освобождает ранее выделенный блок памяти. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>Указатель на блок памяти, который нужно освободить. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0156d756fe74d063ebfa863c5ed176f3" name="a0156d756fe74d063ebfa863c5ed176f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0156d756fe74d063ebfa863c5ed176f3">&#9670;&#160;</a></span>my_malloc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * my_malloc </td>
+          <td>(</td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Выделяет блок памяти заданного размера. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>Размер выделяемой памяти в байтах. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Указатель на выделенную память или NULL при ошибке. </dd></dl>
+
+</div>
+</div>
+<a id="ade5ad20ee01364df80d1ed0aaf2295a1" name="ade5ad20ee01364df80d1ed0aaf2295a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade5ad20ee01364df80d1ed0aaf2295a1">&#9670;&#160;</a></span>my_realloc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * my_realloc </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Перевыделяет блок памяти на новый размер. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>Указатель на блок памяти, который нужно перевыделить. </td></tr>
+    <tr><td class="paramname">size</td><td>Новый размер блока памяти. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Указатель на новый блок памяти или NULL при ошибке. </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>
